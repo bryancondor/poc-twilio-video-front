@@ -7,10 +7,14 @@
     text-align: center;
 }
 
-.control {
+.controls {
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+label[for="toggle-audio"] {
+    margin-right: 16px;
 }
 
 #remote-media-div {
