@@ -17,15 +17,31 @@ label[for="toggle-audio"] {
     margin-right: 16px;
 }
 
-#group-remote-media {
-    max-width: 300px;
+#local-media {
+    max-width: 200px;
     margin-right: auto;
     margin-left: auto;
-    border-radius: 8px;
+    border-radius: 24px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#local-media video {
+    width: 100%;
+    height: inherit;
+}
+
+#group-remote-media {
+    max-width: 450px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #group-remote-media video {
-    background-color: white;
+    background-color: rebeccapurple;
     width: 100%;
-    padding: 8px;
+    padding: 2px;
 }

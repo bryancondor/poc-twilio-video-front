@@ -1,9 +1,14 @@
 'use strict'
-const { connect, createLocalTracks } = require('twilio-video');
+const { connect, createLocalTracks, createLocalVideoTrack } = require('twilio-video');
 const { getAccessToken } = require('./get-access-token');
 require('./style.css');
 
 const accessToken = getAccessToken();
+
+createLocalVideoTrack().then(track => {
+    const localMediaContainer = document.getElementById('local-media');
+    localMediaContainer.appendChild(track.attach());
+});
 
 createLocalTracks(
     {
@@ -107,6 +112,8 @@ createLocalTracks(
         const toggleAudio = document.getElementById('toggle-audio');
         const toggleVideo = document.getElementById('toggle-video');
 
+
+        // Mute Your Local Media
         toggleAudio.addEventListener('click', (event) => {
             room.localParticipant.audioTracks.forEach(publication => {
                 if (event.target.checked) {
@@ -124,6 +131,7 @@ createLocalTracks(
                     publication.track.enable();
                 } else {
                     publication.track.disable();
+                    // publication.unpublish(); // turn off camera's ligth
                 }
             });
         })
