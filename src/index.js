@@ -62,25 +62,31 @@ createLocalTracks(
 
             participant.tracks.forEach(publication => {
                 if (publication.isSubscribed) {
+                    console.log('[bcd] NEW CONEXION - PUBLICATION IS SUSCRIBED');
                     const track = publication.track;
                     document.getElementById('remote-media-div').appendChild(track.attach());
                 }
             });
 
             participant.on('trackSubscribed', track => {
+                console.log('[bcd] NEW CONEXION - TRACK SUSCRIBED',);
                 document.getElementById('remote-media-div').appendChild(track.attach());
             });
+
         });
 
         // For RemoteParticipants that are already in the Room, we can attach their RemoteTracks by iterating over the Room's participants:
         room.participants.forEach(participant => {
             participant.tracks.forEach(publication => {
                 if (publication.track) {
+                    console.log('[bcd] ALREADY CONNECTED - CURRENT TRACKS',);
+
                     document.getElementById('remote-media-div').appendChild(publication.track.attach());
                 }
             });
 
             participant.on('trackSubscribed', track => {
+                console.log('[bcd] ALREADY CONNECTED - TRACK SUSCRIBED');
                 document.getElementById('remote-media-div').appendChild(track.attach());
             });
         });
