@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        * {
+            font-family: sans-serif;
+            background-color: gainsboro;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        #remote-media-div {
+            max-width: 300px;
+
+            margin-right: auto;
+            margin-left: auto;
+            border-radius: 8px;
+        }
+
+        #remote-media-div video {
+            background-color: white;
+            width: 100%;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">Video Conference</h1>
+    <div id="remote-media-div"></div>
+</body>
+
+</html>
