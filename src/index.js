@@ -1,6 +1,7 @@
 'use strict'
 const { connect, createLocalTracks } = require('twilio-video');
 const { getAccessToken } = require('./get-access-token');
+require('./style.css');
 
 const accessToken = getAccessToken();
 

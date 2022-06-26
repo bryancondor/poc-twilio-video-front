@@ -1,0 +1,27 @@
+* {
+    font-family: sans-serif;
+    background-color: gainsboro;
+}
+
+.title {
+    text-align: center;
+}
+
+.control {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#remote-media-div {
+    max-width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 8px;
+}
+
+#remote-media-div video {
+    background-color: white;
+    width: 100%;
+    padding: 8px;
+}

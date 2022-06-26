@@ -14,5 +14,13 @@ module.exports = {
             title: 'Client Video Streaming',
             template: 'index.ejs'
         }),
-    ]
+    ],
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+        ],
+    },
 };
