@@ -19,6 +19,7 @@ createLocalTracks(
     })
     .then(room => {
         console.log(`Connected to Room: ${room.name}`);
+        const groupRemoteMediaElement = document.getElementById('group-remote-media');
 
         // ### Working with Remote Participants ##
         // # Handle Connected Partipants #
@@ -62,15 +63,24 @@ createLocalTracks(
 
             participant.tracks.forEach(publication => {
                 if (publication.isSubscribed) {
-                    console.log('[bcd] NEW CONEXION - PUBLICATION IS SUSCRIBED');
+                    console.log('[bcd] NEW CONEXION - PUBLICATION WAS SUSCRIBED', publication);
                     const track = publication.track;
-                    document.getElementById('remote-media-div').appendChild(track.attach());
+                    groupRemoteMediaElement.appendChild(track.attach());
                 }
             });
 
             participant.on('trackSubscribed', track => {
-                console.log('[bcd] NEW CONEXION - TRACK SUSCRIBED',);
-                document.getElementById('remote-media-div').appendChild(track.attach());
+                console.log('[bcd] NEW CONEXION - TRACK SUSCRIBED', track);
+
+                const videoElement = track.attach();
+                videoElement.setAttribute('id', participant.identity);
+
+                if (checkExist(groupRemoteMediaElement, participant)) {
+                    groupRemoteMediaElement.replaceChildren(videoElement);
+                } else {
+                    groupRemoteMediaElement.appendChild(videoElement);
+                }
+
             });
 
         });
@@ -79,15 +89,17 @@ createLocalTracks(
         room.participants.forEach(participant => {
             participant.tracks.forEach(publication => {
                 if (publication.track) {
-                    console.log('[bcd] ALREADY CONNECTED - CURRENT TRACKS',);
-
-                    document.getElementById('remote-media-div').appendChild(publication.track.attach());
+                    console.log('[bcd] ALREADY CONNECTED - CURRENT TRACKS IN PUBLICATION', publication);
+                    groupRemoteMediaElement.appendChild(publication.track.attach());
                 }
             });
 
             participant.on('trackSubscribed', track => {
-                console.log('[bcd] ALREADY CONNECTED - TRACK SUSCRIBED');
-                document.getElementById('remote-media-div').appendChild(track.attach());
+                console.log('[bcd] ALREADY CONNECTED - TRACK SUSCRIBED', track);
+                const videoElement = track.attach();
+
+                videoElement.setAttribute('id', participant.identity);
+                groupRemoteMediaElement.appendChild(videoElement);
             });
         });
 
@@ -117,4 +129,16 @@ createLocalTracks(
         })
 
     });
+
+function checkExist(groupRemoteMediaElement, participant) {
+    const listVideoElements = [...groupRemoteMediaElement.children];
+
+    const wasRegistered = listVideoElements.some(element => {
+        return element.getAttribute('id') === participant.identity;
+    });
+
+    console.log('[bcd] wasRegistered:', wasRegistered);
+
+    return wasRegistered;
+}
 
