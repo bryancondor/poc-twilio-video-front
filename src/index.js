@@ -77,6 +77,8 @@ createLocalTracks(
             participant.on('trackSubscribed', track => {
                 console.log('[bcd] NEW CONEXION - TRACK SUSCRIBED', track);
 
+                console.log('[bcd] track.attach 1:', track.attach);
+                if (!track.attach) { return }
                 const videoElement = track.attach();
                 videoElement.setAttribute('id', participant.identity);
 
@@ -101,6 +103,9 @@ createLocalTracks(
 
             participant.on('trackSubscribed', track => {
                 console.log('[bcd] ALREADY CONNECTED - TRACK SUSCRIBED', track);
+
+                console.log('[bcd] track.attach 2:', track.attach);
+                if (!track.attach) { return }
                 const videoElement = track.attach();
 
                 videoElement.setAttribute('id', participant.identity);
